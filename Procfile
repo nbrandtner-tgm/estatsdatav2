@@ -1,1 +1,1 @@
-web: java -cp $JAVA_OPTS estatsdata/out/production/estatsdata/
+worker: java -jar target/estatsdata-1.0-SNAPSHOT-jar-with-dependencies.jar

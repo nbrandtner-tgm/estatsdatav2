@@ -1,5 +1,7 @@
 package org.example;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -27,7 +29,9 @@ public class MySQLnew {
                     System.out.println(e);
                 }
                 // Verbindung zur Datenbank aufbauen
-                conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/testing", "root", "root");
+                //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/testing", "root", "root");
+
+                conn= (Connection) DriverManager.getConnection("us-cdbr-east-06.cleardb.net:3307/estats", "b4b359dda34c84", "41374086");
                 System.out.println("Connection is created successfully:");
                 while (true) {
                     // Timestamp erstellen
