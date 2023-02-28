@@ -1,0 +1,1 @@
+web: java -cp $JAVA_OPTS estatsdata/out/production/estatsdata/
