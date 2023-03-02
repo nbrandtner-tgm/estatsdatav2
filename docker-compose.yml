@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nbra
+      MYSQL_USER: nbra
+      MYSQL_PASSWORD: nbra
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+#    links:
+#      - mysql
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+  generator:
+    image: nbrandtner/datagenerator:1.0
+    container_name: datagenerator
+    restart: always
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
