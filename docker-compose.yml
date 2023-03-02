@@ -6,9 +6,10 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: nbra
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: nbra
       MYSQL_PASSWORD: nbra
+      MYSQL_DATABASE: estatsdb
     ports:
       - "3306:3306"
     volumes:
@@ -21,15 +22,13 @@ services:
     restart: always
     environment:
       PMA_HOST: mysql
-#    links:
-#      - mysql
     ports:
       - "8080:80"
     depends_on:
       - mysql
 
   generator:
-    image: nbrandtner/datagenerator:1.0
+    image: nbrandtner/datagenerator:latest
     container_name: datagenerator
     restart: always
     depends_on:

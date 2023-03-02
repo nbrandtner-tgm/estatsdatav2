@@ -30,9 +30,9 @@ public class MySQLnew {
             // Verbindung zur Datenbank aufbauen
 
             //USE FIRST LINE IF YOU RUN THE PROGRAM ON YOUR LOCAL MACHINE (Remove // in front of the line)
-            //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/testing", "root", "root");
+            //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/estatsdb", "root", "root");
             //USE SECOND LINE IF YOU RUN THE PROGRAM IN DOCKER (Remove // in front of the line)
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://mysql:3306/testing", "root", "root");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://mysql:3306/estatsdb", "root", "root");
 
             System.out.println("Connection is created successfully:");
 

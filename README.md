@@ -27,7 +27,7 @@ Change the networkName to whatever you want and the path to where you want the c
 
 You can access the phpmyadmin GUI at localhost:8080 now and login with your password and username 'root' <br>
 
-Next you need to create a new database, best name it "testing" and run the `generator.sql` file located in the sql 
+Next you need to create a new database, best name it "estatsdb" and run the `generator.sql` file located in the sql 
 folder to create the table where the data from our generator is gonna be saved in. 
 (When naming it something else you might need to change line 35 in `MySQLnew.java`)<br> 
 
@@ -40,13 +40,14 @@ In the terminal run the following command to build the project:
 ```bash
 mvn clean
 mvn compile package install
-docker pull nbrandtner/datagenerator:1.0
-docker run -it -d --name containerName --network networkName nbrandtner/datagenerator:1.0
+docker pull nbrandtner/datagenerator:latest
+docker run -it -d --name containerName --network networkName nbrandtner/datagenerator:latest
 ```
 Change the networkName to the one you chose before and the containerName to whatever you want. <br>
 Now you should have three docker containers running, one for mysql, one for phpmyadmin and one for the datagenerator. <br>
 You can access the phpmyadmin at localhost:8080. <br>
-There should be a database called "testing" and a table called "estats" in it. <br>
+There should be a database called "estatsdb" <br>
+Now you can execute your preferred sql file in the sql folder to get the structure of the table. <br>
 As long as the datagenerator container is running, it will generate data every minute and save it in the database. <br>
 
 ### Docker-compose Version:
