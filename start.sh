@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar data.jar
+java -jar /estats/data.jar
