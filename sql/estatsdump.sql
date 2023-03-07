@@ -28,15 +28,27 @@ START TRANSACTION;
 
 DROP TABLE IF EXISTS `estats`;
 CREATE TABLE `estats` (
-                          `region` varchar(20) NOT NULL,
-                          `verbrauchAnteil` decimal(20,4) NOT NULL,
-                          `verbrauch` decimal(20,4) NOT NULL,
-                          `preis` bigint NOT NULL,
-                          `emission` decimal(20,4) NOT NULL,
-                          `import` decimal(20,4) NOT NULL,
-                          `export` decimal(20,4) NOT NULL,
-                          `date` datetime NOT NULL
+    `region` varchar(20) NOT NULL,
+    `verbrauchAnteil` decimal(20,4) NOT NULL,
+    `verbrauch` decimal(20,4) NOT NULL,
+    `preis` bigint NOT NULL,
+    `emission` decimal(20,4) NOT NULL,
+    `import` decimal(20,4) NOT NULL,
+    `export` decimal(20,4) NOT NULL,
+    `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `voraussagen`;
+CREATE TABLE voraussagen(
+    region               VARCHAR(20) NOT NULL
+    ,vorverbrauch        decimal(20,4) NOT NULL
+    ,vorpreis            BIGINT NOT NULL
+    ,voremission         decimal(20,4) NOT NULL
+    ,vorimport           decimal(20,4) NOT NULL
+    ,vorexport           decimal(20,4) NOT NULL
+    ,hour				 INT NOT NULL
+    ,PRIMARY KEY(hour)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `estats`
