@@ -39,7 +39,8 @@ public class MySQLnew {
             while (true) {
                 LocalTime time = LocalTime.now();
                 //time.getMinute() == 0 &&
-                if (time.getSecond() == 0) {
+                boolean alreadydone = false;
+                if (time.getSecond() == 0 && alreadydone == false) {
                     System.out.println("It's a new hour!");
                     // Timestamp erstellen
                     date = new Date();
@@ -135,6 +136,7 @@ public class MySQLnew {
                     int anzahlGeloeschterDatensaetze = stmt.executeUpdate(sql);
                     System.out.println(anzahlGeloeschterDatensaetze + " Datensätze wurden gelöscht.");
                 }
+                alreadydone = true;
             }
         }catch (SQLException e) {
             System.out.println(e);
