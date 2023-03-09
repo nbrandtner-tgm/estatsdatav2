@@ -16,7 +16,7 @@ public class MySQLnew {
     public static void main(String[] args) {
         Date date;
         Timestamp timestamp;
-        Timestamp timestampYesterday;
+        Timestamp timestampDelete;
         // Connection zu MySQL aufbauen
         Connection conn = null;
         Statement stmt = null;
@@ -32,14 +32,14 @@ public class MySQLnew {
             //USE FIRST LINE IF YOU RUN THE PROGRAM ON YOUR LOCAL MACHINE (Remove // in front of the line)
             //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/estatsdb", "root", "root");
             //USE SECOND LINE IF YOU RUN THE PROGRAM IN DOCKER (Remove // in front of the line)
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://mysql:3306/estatsdb", "root", "root");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://proj_2223_eStatsAustria_mysql:3306/estatsdb", "root", "root");
 
             System.out.println("Connection is created successfully:");
 
             while (true) {
                 LocalTime time = LocalTime.now();
-                //time.getMinute() == 0 &&
                 boolean alreadydone = false;
+                //time.getMinute() == 0 && (add this line when not testing anymore, will change save intervall from minutely to hourly)
                 if (time.getSecond() == 0 && alreadydone == false) {
                     System.out.println("It's a new hour!");
                     // Timestamp erstellen
@@ -47,7 +47,7 @@ public class MySQLnew {
                     timestamp = new Timestamp(date.getTime());
                     // Timestamp von gestern erstellen um die Daten, die älter als gestern sind zu löschen
                     Instant instant = timestamp.toInstant().minus(java.time.Duration.ofDays(30));
-                    timestampYesterday = Timestamp.from(instant);
+                    timestampDelete = Timestamp.from(instant);
                     System.out.println(sdf.format(timestamp) + " oder " + timestamp);
                     //Statement machen und Generator aufrufen
                     stmt = conn.createStatement();
@@ -132,7 +132,7 @@ public class MySQLnew {
                     }
                     System.out.println(anteilStatement);
                     // Daten löschen die älter als gestern sind
-                    String sql = "DELETE FROM estats WHERE date < '" + sdf.format(timestampYesterday) + "'";
+                    String sql = "DELETE FROM estats WHERE date < '" + sdf.format(timestampDelete) + "'";
                     int anzahlGeloeschterDatensaetze = stmt.executeUpdate(sql);
                     System.out.println(anzahlGeloeschterDatensaetze + " Datensätze wurden gelöscht.");
                 }
