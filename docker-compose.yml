@@ -3,15 +3,13 @@ version: '3'
 services:
   mysql:
     image: mysql
-    container_name: proj_2223_eStatsAustria_mysql
+    container_name: proj2223_estatsaustria_mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: nbra
       MYSQL_PASSWORD: nbra
       MYSQL_DATABASE: estatsdb
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./sql/estatsdump.sql:/docker-entrypoint-initdb.d/estatsdump.sql
@@ -19,10 +17,10 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: proj_2223_eStatsAustria_phpmyadmin
+    container_name: proj2223_estatsaustria_phpmyadmin
     restart: always
     environment:
-      PMA_HOST: proj_2223_eStatsAustria_mysql
+      PMA_HOST: mysql
     ports:
       - "8080:80"
     depends_on:
@@ -30,7 +28,7 @@ services:
 
   generator:
     image: nbrandtner/datagenerator:latest
-    container_name: proj_2223_eStatsAustria_datagenerator
+    container_name: proj2223_estatsaustria_datagenerator
     restart: always
     depends_on:
       - mysql
