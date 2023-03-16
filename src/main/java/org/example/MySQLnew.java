@@ -39,7 +39,7 @@ public class MySQLnew {
             while (true) {
                 LocalTime time = LocalTime.now();
                 boolean alreadydone = false;
-                if(time.getSecond()<49){
+                if(time.getSecond()<49 | alreadydone==true){
                 Thread.sleep(10000);
                 }
                 // (add this line when not testing anymore, will change save intervall from minutely to hourly)
