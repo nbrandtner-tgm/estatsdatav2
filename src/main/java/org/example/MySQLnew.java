@@ -39,8 +39,11 @@ public class MySQLnew {
             while (true) {
                 LocalTime time = LocalTime.now();
                 boolean alreadydone = false;
-                //time.getMinute() == 0 && (add this line when not testing anymore, will change save intervall from minutely to hourly)
-                if (time.getSecond() == 0 && alreadydone == false) {
+                if(time.getSecond()<49){
+                Thread.sleep(10000);
+                }
+                // (add this line when not testing anymore, will change save intervall from minutely to hourly)
+                if (time.getMinute() == 0 && time.getSecond() == 0 && alreadydone == false) {
                     System.out.println("It's a new hour!");
                     // Timestamp erstellen
                     date = new Date();
@@ -140,6 +143,8 @@ public class MySQLnew {
             }
         }catch (SQLException e) {
             System.out.println(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
             if (stmt != null) {
                 try {

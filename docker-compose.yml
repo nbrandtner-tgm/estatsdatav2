@@ -10,6 +10,7 @@ services:
       MYSQL_USER: nbra
       MYSQL_PASSWORD: nbra
       MYSQL_DATABASE: estatsdb
+      TZ: Europe/Vienna
     volumes:
       - mysql_data:/var/lib/mysql
       - ./sql/estatsdump.sql:/docker-entrypoint-initdb.d/estatsdump.sql
@@ -21,6 +22,7 @@ services:
     restart: always
     environment:
       PMA_HOST: mysql
+      TZ: Europe/Vienna
     ports:
       - "8080:80"
     depends_on:
@@ -32,6 +34,8 @@ services:
     restart: always
     depends_on:
       - mysql
+    environment:
+      TZ: Europe/Vienna
 
 volumes:
   mysql_data:
