@@ -11,8 +11,10 @@ services:
       MYSQL_PASSWORD: banjodevs
       MYSQL_DATABASE: estatsdb
       TZ: Europe/Vienna
+      ports:
+        - "14306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
       - ./sql/estatsdump.sql:/docker-entrypoint-initdb.d/estatsdump.sql
 
 
@@ -24,7 +26,7 @@ services:
       PMA_HOST: mysql
       TZ: Europe/Vienna
     ports:
-      - "8080:80"
+      - "14080:80"
     depends_on:
       - mysql
 
@@ -36,6 +38,11 @@ services:
       - mysql
     environment:
       TZ: Europe/Vienna
-
-volumes:
-  mysql_data:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 512M
+networks:
+  default:
+    name: proj2223_estatsaustria_net
