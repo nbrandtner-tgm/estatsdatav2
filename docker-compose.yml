@@ -7,8 +7,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: nbra
-      MYSQL_PASSWORD: nbra
+      MYSQL_USER: banjodevs
+      MYSQL_PASSWORD: banjodevs
       MYSQL_DATABASE: estatsdb
       TZ: Europe/Vienna
     volumes:
