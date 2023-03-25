@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -9,8 +8,7 @@ import java.util.Date;
 public class MySQLnew {
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     /**
-     * @param args
-     * @throws SQLException
+     * @param args the command line arguments
      * Connection zur Datenbank aufbauen und Generator aufrufen, um Daten zu generieren und in die Datenbank einzufuegen
      */
     public static void main(String[] args) {
@@ -32,15 +30,18 @@ public class MySQLnew {
             //USE FIRST LINE IF YOU RUN THE PROGRAM ON YOUR LOCAL MACHINE (Remove // in front of the line)
             //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/estatsdb", "root", "root");
             //USE SECOND LINE IF YOU RUN THE PROGRAM IN DOCKER (Remove // in front of the line)
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://mysql:3306/estatsdb", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/estatsdb", "root", "root");
 
             System.out.println("Connection is created successfully:");
-
+            boolean alreadydone = false;
             while (true) {
                 LocalTime time = LocalTime.now();
-                boolean alreadydone = false;
-                if(time.getSecond()<49 | alreadydone==true){
-                Thread.sleep(10000);
+                if (time.getMinute() < 59) {
+                    Thread.sleep(60000);
+                } else {
+                    if (time.getSecond() < 49) {
+                        Thread.sleep(10000);
+                    }
                 }
                 // (add this line when not testing anymore, will change save intervall from minutely to hourly)
                 if (time.getMinute() == 0 && time.getSecond() == 0 && alreadydone == false) {
@@ -138,10 +139,10 @@ public class MySQLnew {
                     String sql = "DELETE FROM estats WHERE date < '" + sdf.format(timestampDelete) + "'";
                     int anzahlGeloeschterDatensaetze = stmt.executeUpdate(sql);
                     System.out.println(anzahlGeloeschterDatensaetze + " Datensätze wurden gelöscht.");
+                    alreadydone = true;
                 }
-                alreadydone = true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -163,4 +164,3 @@ public class MySQLnew {
         }
     }
 }
-
