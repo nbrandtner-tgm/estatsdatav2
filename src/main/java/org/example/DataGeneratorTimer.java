@@ -52,7 +52,6 @@ public class DataGeneratorTimer {
         @Override
         public void run() {
             try {
-                LocalTime time = LocalTime.now();
                 // Timestamp erstellen
                 date = new Date();
                 timestamp = new Timestamp(date.getTime());
@@ -68,7 +67,6 @@ public class DataGeneratorTimer {
                 double co2Emissionen = 0;
                 double stromimport = 0;
                 double stromexport = 0;
-                int count = 0;
                 // Diese Schleife geht durch alle Bundesländer und speichert die generierten Daten in der Datenbank
                 for (int j = 0; j < 9; j++) {
                     // data ist ein Array mit den Daten die der Generator generiert
@@ -77,33 +75,15 @@ public class DataGeneratorTimer {
                     int preis = data[1].intValue();
                     // Bundesland herausfinden
                     switch (data[5].intValue()) {
-                        case 0:
-                            state = "Burgenland";
-                            break;
-                        case 1:
-                            state = "Kaernten";
-                            break;
-                        case 2:
-                            state = "Niederoesterreich";
-                            break;
-                        case 3:
-                            state = "Oberoesterreich";
-                            break;
-                        case 4:
-                            state = "Salzburg";
-                            break;
-                        case 5:
-                            state = "Steiermark";
-                            break;
-                        case 6:
-                            state = "Tirol";
-                            break;
-                        case 7:
-                            state = "Vorarlberg";
-                            break;
-                        case 8:
-                            state = "Wien";
-                            break;
+                        case 0 -> state = "Burgenland";
+                        case 1 -> state = "Kaernten";
+                        case 2 -> state = "Niederoesterreich";
+                        case 3 -> state = "Oberoesterreich";
+                        case 4 -> state = "Salzburg";
+                        case 5 -> state = "Steiermark";
+                        case 6 -> state = "Tirol";
+                        case 7 -> state = "Vorarlberg";
+                        case 8 -> state = "Wien";
                     }
                     // Query für jedes Bundesland erstellen und ausführen
                     String genquery = "INSERT INTO estats " + "VALUES ('" + state + "',0.0," + data[0] + "," + preis + "," + data[2] + "," + data[3] + "," + data[4] + ",'" + sdf.format(timestamp) + "');";
