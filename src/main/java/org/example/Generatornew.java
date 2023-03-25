@@ -56,7 +56,7 @@ public class Generatornew {
         int minstromverbrauch = 300000;
         int maxstromverbrauch = 500000;
         double stromverbrauch = Math.floor(Math.random()*(maxstromverbrauch-minstromverbrauch+1)+minstromverbrauch)/10000 * multiplier;
-        stromverbrauch =((double)((int)(stromverbrauch *10000.0)))/10000.0; //Cuttet �berfl�ssige Dezimalstellen
+        stromverbrauch =((double)((int)(stromverbrauch *10000.0)))/10000.0; //Cuttet ueberfluessige Dezimalstellen
         System.out.println("Stromverbrauch von "+ state + ": "+stromverbrauch+"PJ");
 
         // strompreis:

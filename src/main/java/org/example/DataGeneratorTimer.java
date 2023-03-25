@@ -18,7 +18,7 @@ public class DataGeneratorTimer {
     static Statement stmt = null;
     /**
      * @param args the command line arguments
-     *             Connection zur Datenbank aufbauen und Generator aufrufen, um Daten zu generieren und in die Datenbank einzufuegen
+     * Connection zur Datenbank aufbauen und Generator aufrufen, um Daten zu generieren und in die Datenbank einzufuegen
      */
     public static void main(String[] args) throws InterruptedException {
 
@@ -55,7 +55,7 @@ public class DataGeneratorTimer {
                 // Timestamp erstellen
                 date = new Date();
                 timestamp = new Timestamp(date.getTime());
-                // Timestamp von gestern erstellen um die Daten, die älter als gestern sind zu löschen
+                // Timestamp von gestern erstellen um die Daten, die aelter als gestern sind zu loeschen
                 Instant instant = timestamp.toInstant().minus(java.time.Duration.ofDays(30));
                 timestampDelete = Timestamp.from(instant);
                 System.out.println(sdf.format(timestamp) + " oder " + timestamp);
@@ -67,11 +67,11 @@ public class DataGeneratorTimer {
                 double co2Emissionen = 0;
                 double stromimport = 0;
                 double stromexport = 0;
-                // Diese Schleife geht durch alle Bundesländer und speichert die generierten Daten in der Datenbank
+                // Diese Schleife geht durch alle Bundeslaender und speichert die generierten Daten in der Datenbank
                 for (int j = 0; j < 9; j++) {
                     // data ist ein Array mit den Daten die der Generator generiert
                     Double[] data = Generatornew.genData(j);
-                    // da preis ein int ist müssen wir diesen wieder aus dem Double Array umwandeln
+                    // da preis ein int ist muessen wir diesen wieder aus dem Double Array umwandeln
                     int preis = data[1].intValue();
                     // Bundesland herausfinden
                     switch (data[5].intValue()) {
@@ -85,7 +85,7 @@ public class DataGeneratorTimer {
                         case 7 -> state = "Vorarlberg";
                         case 8 -> state = "Wien";
                     }
-                    // Query für jedes Bundesland erstellen und ausführen
+                    // Query fuer jedes Bundesland erstellen und ausfuehren
                     String genquery = "INSERT INTO estats " + "VALUES ('" + state + "',0.0," + data[0] + "," + preis + "," + data[2] + "," + data[3] + "," + data[4] + ",'" + sdf.format(timestamp) + "');";
                     stmt.executeUpdate(genquery);
                     System.out.println("Query für: " + state + " erfolgreich");
@@ -99,11 +99,11 @@ public class DataGeneratorTimer {
 
                 // Strompreis Durchschnitt berechnen
                 strompreis = strompreis / 9;
-                // Query für ganz Österreich erstellen und ausführen
+                // Query fuer ganz Österreich erstellen und ausfuehren
                 String queryAll = "INSERT INTO estats " + "VALUES ('" + "Oesterreich" + "',100.0," + stromverbrauch + "," + strompreis + "," + co2Emissionen + "," + stromimport + "," + stromexport + ",'" + sdf.format(timestamp) + "')";
                 System.out.println(queryAll);
                 stmt.executeUpdate(queryAll);
-                // Gesamtstatistiken für ganz Österreich machen
+                // Gesamtstatistiken fuer ganz Österreich machen
                 System.out.println("Record is inserted in the table successfully..................");
                 System.out.println("Please check it in the MySQL Table..........");
 
@@ -122,7 +122,7 @@ public class DataGeneratorTimer {
                     stmt.executeUpdate(sqlAnteil);
                 }
                 System.out.println(anteilStatement);
-                // Daten löschen die älter als gestern sind
+                // Daten loeschen die aelter als gestern sind
                 String sql = "DELETE FROM estats WHERE date < '" + sdf.format(timestampDelete) + "'";
                 int anzahlGeloeschterDatensaetze = stmt.executeUpdate(sql);
                 System.out.println(anzahlGeloeschterDatensaetze + " Datensätze wurden gelöscht.");
