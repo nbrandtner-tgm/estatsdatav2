@@ -45,7 +45,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.example.DataGeneratorTimer</mainClass>
+                            <mainClass>org.example.MySQLnew</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
