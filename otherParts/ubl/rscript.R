@@ -1,0 +1,8 @@
+install.packages("devtools")
+install.packages("DBI")
+install.packages("dbplyr")
+install.packages("forecast")
+devtools::install_github("bnosac/cronR")
+library(cronR)
+cmd <- cron_rscript("DatenbankConnection.R")
+cron_add(command = cmd, frequency = 'hourly', at = "13:00" , id = 'test_linux_run', description = "testing linux scheduler")

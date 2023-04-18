@@ -52,7 +52,7 @@ public class MySQLnew {
                     // Timestamp erstellen
                     date = new Date();
                     timestamp = new Timestamp(date.getTime());
-                    // Timestamp von gestern erstellen um die Daten, welche die aelter als ein Monat sind zu loeschen
+                    // Timestamp von letztem Monat erstellen um die Daten, welche aelter als ein Monat sind zu loeschen
                     Instant instant = timestamp.toInstant().minus(java.time.Duration.ofDays(30));
                     timestampDelete = Timestamp.from(instant);
                     System.out.println(sdf.format(timestamp) + " oder " + timestamp);
